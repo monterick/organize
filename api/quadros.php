@@ -7,7 +7,7 @@ switch($acao){
 
     $login = $_POST['login'];
 
-    $sel = "SELECT * FROM quadros WHERE login = ?";
+    $sel = "SELECT * FROM quadros WHERE arquivado <> 1 AND login = ?";
 
     $stm = $pdo->prepare($sel);
     $stm->bindParam(1, $login, \PDO::PARAM_INT);
