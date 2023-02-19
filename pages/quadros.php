@@ -300,7 +300,7 @@ if($_SESSION['session_log']!='S'){
     
       function listar_comentarios(id){
         var fd = new FormData()
-        document.getElementById('id_tarefa_b').value = id
+        document.getElementById('cod_tarefa').value = id
         fd.append('acao','listar_comentarios')
         fd.append('id',id)
         var Ajax = new XMLHttpRequest()
@@ -333,11 +333,67 @@ if($_SESSION['session_log']!='S'){
              if(Ajax.status == 200){
                var resposta = Ajax.responseText
                console.log(resposta)
+               document.getElementById('comentario_atv').value = ''
                listar_comentarios(id_tarefa)
              }
           }
         }
         Ajax.send(fd)
+      }
+
+      function excluir_comentario(id_tarefa,id){
+        if(confirm('Deseja realmente excluir este comentário?')){
+          var fd = new FormData()
+          fd.append('acao', 'excluir_comentario')
+          fd.append('id',id)
+          var Ajax = new XMLHttpRequest()
+            Ajax.open('POST','../api/quadros.php',true)
+            Ajax.onreadystatechange = function(){
+              if(Ajax.readyState == 4){
+                if(Ajax.status == 200){
+                  var resposta = Ajax.responseText
+                  console.log(resposta)                  
+                  listar_comentarios(id_tarefa)
+                }
+              }
+            }
+            Ajax.send(fd)
+  
+        }
+      }
+
+      function libera_editar(textarea,button,button2){
+        document.getElementById(textarea).removeAttribute('disabled')
+        document.getElementById(button).style.display = 'block'
+        document.getElementById(button2).style.display = 'block'
+      }
+      function bloqueia_editar(textarea,button,button2){
+        document.getElementById(textarea).setAttribute('disabled','disabled')
+        document.getElementById(button).style.display = 'none'
+        document.getElementById(button2).style.display = 'none'
+      }
+
+      function editar_comentario(id_tarefa,id,textarea){
+
+          var fd = new FormData()
+          var comentario = document.getElementById(textarea).value
+          fd.append('acao', 'alterar_comentario')
+          fd.append('id',id)
+          fd.append('comentario',comentario)
+          var Ajax = new XMLHttpRequest()
+            Ajax.open('POST','../api/quadros.php',true)
+            Ajax.onreadystatechange = function(){
+              if(Ajax.readyState == 4){
+                if(Ajax.status == 200){
+                  var resposta = Ajax.responseText
+                  console.log(resposta)                  
+                  listar_comentarios(id_tarefa)
+                }
+              }
+            }
+            Ajax.send(fd)
+  
+        
       }
                            
     </script>

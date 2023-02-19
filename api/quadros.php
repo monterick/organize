@@ -443,14 +443,23 @@ switch($acao){
     $exec->execute();
     if($exec->rowCount() > 0){ echo "Histórico";
       while($rst = $exec->fetch(\PDO::FETCH_ASSOC)){ 
-        
+        $id_comentario = $rst['id'];
         ?>
           <div class="row" style="margin-top: 5px;">                        
                 <div class="col">
                     <input type="hidden" name="cod_tarefa_alt<?=$id_tarefa?>" id="cod_tarefa_alt<?=$id_tarefa?>" value="<?=$id_tarefa?>">
                     <textarea  disabled class="form-control" name="comentario_atv_alt<?=$rst['id']?>" id="comentario_atv_alt<?=$rst['id']?>"  cols="30" rows="1" ><?=$rst['descricao']?></textarea>
-                    <div><a href="#">Excluir</a><a href="#" style="margin-left: 10px;">Editar</a></div>                    
-                    <button id="salvar_comentario_alt<?=$rst['id']?>" onclick="('opaa')" style="margin-top: 10px;display: none;" class="btn btn-primary">Salvar</button>
+                    <div class="row">
+                    <div class="col-md-1">
+                    <button id="salvar_comentario_alt<?=$rst['id']?>" onclick="editar_comentario('<?=$id_tarefa?>','<?=$rst['id']?>','comentario_atv_alt<?=$rst['id']?>')" style="margin-top: 12px;font-size: 12px;display: none;" class="btn btn-primary">Salvar</button> 
+                   </div>
+                    <div class="col-md-1"> 
+                    <button id="cancelar_editar<?=$rst['id']?>" onclick="bloqueia_editar('comentario_atv_alt<?=$rst['id']?>','salvar_comentario_alt<?=$rst['id']?>','cancelar_editar<?=$rst['id']?>')" class="btn btn-secondary" style="margin-top: 12px;font-size: 12px;display: none;">Cancelar</button>
+                    </div>    
+                </div>
+                    <div><a onclick="excluir_comentario('<?=$id_tarefa?>','<?=$id_comentario?>')" href="#">Excluir</a><a onclick="libera_editar('comentario_atv_alt<?=$rst['id']?>','salvar_comentario_alt<?=$rst['id']?>','cancelar_editar<?=$rst['id']?>')" href="#" style="margin-left: 10px;">Editar</a></div>                    
+                   
+                    
                 </div>
             </div>
       <?php }
@@ -467,6 +476,20 @@ switch($acao){
   $exec->execute();
 
  break;
+
+ case 'excluir_comentario':
+    $id = $_POST['id'];
+    $delete = "DELETE FROM atividade WHERE id = '{$id}'";
+    $exec = $pdo->prepare($delete);
+    $exec->execute();
+ break;   
+ case 'alterar_comentario':
+    $id = $_POST['id'];
+    $descricao = $_POST['comentario'];
+    $delete = "UPDATE atividade set descricao = '{$descricao}' WHERE id = '{$id}'";
+    $exec = $pdo->prepare($delete);
+    $exec->execute();
+ break;   
 
  
 }
