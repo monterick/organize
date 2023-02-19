@@ -13,4 +13,4 @@ Desenvolver aplicação web para gerenciamento de projetos baseada na metodologi
 #9 - Implementar drag and drop para arrastar e soltar tarefas entre listas.
 10 - Adicionar funcionalidade de editar e excluir tarefas.
 
-Ao longo do desenvolvimento, é importante que o candidato utilize requisições AJAX para atualizar dinamicamente a interface sem precisar recarregar a página inteira
+utilize requisições AJAX para atualizar dinamicamente a interface sem precisar recarregar a página inteira
