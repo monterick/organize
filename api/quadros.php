@@ -299,8 +299,8 @@ switch($acao){
                         <div id="form_cartao<?=$id_lista?>"  style="margin: 10px;margin-top: -10px;" class="column column-todo"><button onclick="form_newcartao('div_cartao<?=$id_lista?>')" style="font-size: 10px;" class="btn btn-secondary"><i class="fa fa-pencil"></i>+Tarefa</button>
                           <div id="div_cartao<?=$id_lista?>" style="margin-top: 5px; display: none;">
                                 <input type="text" id="name_newcartao<?=$id_lista?>" name="name_newcartao" class="form-control">
-                                <button style="margin-top:5px" onclick="salvar_cartao('<?=$id?>','<?=$id_lista?>')" class="btn btn-primary">Salvar</button>
-                                <button style="margin-top:5px;margin-left:5px" onclick="voltar_cartao('div_cartao<?=$id_lista?>')" class="btn btn-secondary">Cancelar</button>
+                                <button style="font-size: 12px; margin-top:5px" onclick="salvar_cartao('<?=$id?>','<?=$id_lista?>')" class="btn btn-primary">Salvar</button>
+                                <button style="font-size: 12px;margin-top:5px;margin-left:5px" onclick="voltar_cartao('div_cartao<?=$id_lista?>')" class="btn btn-secondary">Cancelar</button>
                             
                           </div>
                         </div>
