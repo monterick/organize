@@ -1,0 +1,137 @@
+body{
+    margin: 0;
+    
+}
+.AppForm {
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(#000, .1);
+    padding: 20px;
+}
+
+.AppForm>*:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.AppForm .Title {
+    font-size: .85em;
+    background-color: #09f;
+    color: #fff;
+    margin: -20px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.AppInput {
+    height: 45px;
+}
+
+.AppInput label {
+    display: flex;
+    flex-direction: column;
+}
+
+.AppInput label span {
+    text-transform: uppercase;
+    color: #09f;
+    font-size: .8em;
+    height: 15px;
+    letter-spacing: .75px;
+}
+
+.AppInput label input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    /* fix edge's default border-radius */
+    height: 30px;
+    color: #222;
+}
+
+.AppInput label input:focus {
+    border-color: #09f;
+    outline: none;
+}
+
+.AppInput label input::placeholder {
+    color: #ccc;
+}
+
+
+.LoginForm {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.AppButton {
+    background-color: #09f;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px;
+    border: none;
+    padding: 7px 10px;
+}
+
+nav.AppHeader {
+    background-color: #09f;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    padding: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
+    color: #fff;
+}
+
+#app{
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 50px 1fr 100px;
+    grid-template-areas: 
+    'header header'
+    'sidebar content'
+    'sidebar content'        
+    ;
+}
+nav.header{
+    display: flex;
+    grid-area: header;
+    background-color: #09f;
+}
+.sidebar{
+    display: flex;
+    grid-area: sidebar;
+    background-color: #000e20;
+    flex-direction: column;
+}
+.content{
+    display: flex;
+    grid-area: content;
+}
+.buttonNav{
+    text-align: center;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fff;
+}
+.buttonNav:hover{
+  background-color: #09f;
+  text-decoration: none;
+  color: #fff;
+  animation: fadein 2s; /* Padrão */
+}
+
+#cardHover:hover{
+  cursor: pointer;
+  background-color: #ac0e0e;
+}
+

@@ -1,0 +1,16 @@
+Desenvolver aplicação web para gerenciamento de projetos baseada na metodologia kanban 
+(use como modelo o Trello)
+
+#1 - Criar um layout básico da aplicação usando HTML, CSS e JavaScript.
+
+#2 - Criar as funcionalidades de login e cadastro de usuários com PHP e MySQL.
+#3 - Criar uma página inicial onde o usuário possa visualizar todos os seus quadros.
+#4 - Adicionar funcionalidade de criar novos quadros.
+#5 - Criar uma página para visualizar as listas de um quadro específico.
+#6 - Adicionar funcionalidade de adicionar novas listas a um quadro.
+#7 - Criar uma página para visualizar as tarefas de uma lista específica.
+#8 - Adicionar funcionalidade de adicionar novas tarefas a uma lista.
+#9 - Implementar drag and drop para arrastar e soltar tarefas entre listas.
+10 - Adicionar funcionalidade de editar e excluir tarefas.
+
+Ao longo do desenvolvimento, é importante que o candidato utilize requisições AJAX para atualizar dinamicamente a interface sem precisar recarregar a página inteira
