@@ -67,3 +67,15 @@ if($acao == 'salvar'){
       echo '1';
   }
 }
+
+if($acao == 'excluir'){
+
+    $id = $_POST['id'];
+    $del = "DELETE FROM usuario WHERE id = '{$id}'";
+    $exec = $pdo->prepare($del);
+    $exec->execute();
+    if($exec->rowCount() > 0){
+         echo '1';
+    }
+
+}

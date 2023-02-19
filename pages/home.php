@@ -66,8 +66,9 @@ if($_SESSION['session_log']!='S'){
         <div class="sidebar">
           <span style="margin-top: 50PX;"></span>
            <a class="buttonNav" target="iframe" href="quadros.php"><i class="fa fa-list-alt" aria-hidden="true"></i>Quadros</a>
+           <?php if($_SESSION['perfil'] == 1){?>
            <a class="buttonNav" target="iframe" href="usuarios.php"><i class="fa fa-users" aria-hidden="true"></i> Usuários</a>
-           
+           <?php }?>
         </div>
         <div class="content">
         <iframe name="iframe" id="IdIframe" scrolling="Auto" src="quadros.php" frameborder="0" width="100%"> </iframe>

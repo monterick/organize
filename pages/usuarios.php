@@ -150,6 +150,42 @@
             }
            
         }
+
+        function excluir(id){
+            if(confirm('Deseja realmente excluir este usuário?')){
+                    var fd = new FormData()
+                    fd.append('acao','excluir')
+                    fd.append('id',id)                   
+                    var Ajax = new XMLHttpRequest()
+                    Ajax.open('POST','../api/usuarios.php',true)
+                    Ajax.onreadystatechange = function(){
+                        if(Ajax.readyState == 4){
+                            if(Ajax.status = 200){
+                            resposta = Ajax.responseText
+                            if(resposta == 1){
+                                Swal.fire(
+                                'Usuário Excluído com sucesso!!',
+                                '',
+                                'success'
+                                ).then((result) => { 
+                                    listar_usuarios()      
+                                    $('.modal').modal('hide');             
+                                    
+                                })
+                            }
+                            
+                            }else{
+                                Swal.fire(
+                                'Erro ao excluir Usuário!',
+                                '',
+                                'error'
+                                )
+                            }
+                        }
+                    }
+                    Ajax.send(fd)
+            } 
+        }
     </script>
 </body>
 </html>
