@@ -53,12 +53,12 @@ if($_SESSION['session_log']!='S'){
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a target="iframe" href="./quadros.php" class="nav-link align-middle px-0">
-                             <span class="ms-1 d-none d-sm-inline"><i class="fa fa-list-alt" aria-hidden="true"></i>Quadros</span>
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>  <span class="ms-1 d-none d-sm-inline">Quadros</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a target="iframe" href="./usuarios.php" class="nav-link align-middle px-0">
-                             <span class="ms-1 d-none d-sm-inline"><i class="fa fa-users" aria-hidden="true"></i> Usuários</span>
+                        <i class="fa fa-users" aria-hidden="true"></i> <span class="ms-1 d-none d-sm-inline"> Usuários</span>
                         </a>
                     </li>
                     

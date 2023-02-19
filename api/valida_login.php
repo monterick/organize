@@ -1,9 +1,10 @@
 <?php
 
-session_start();
 
 #####Inclusão da conexao pdo
 include '../config/conexao.php';
+
+session_start();
 
 $login = strip_tags(trim($_POST["login"]));
 $senha = strip_tags(trim($_POST["pass"]));
