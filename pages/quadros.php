@@ -395,7 +395,34 @@ if($_SESSION['session_log']!='S'){
   
         
       }
-                           
+                    
+      function excluir_tarefa(id_quadro){
+        var cod_tarefa = document.getElementById('cod_tarefa').value
+        if(confirm('Deseja realmente excluir este quadro?')){
+          var fd = new FormData()
+          fd.append('acao','excluir_tarefa')
+          fd.append('id',cod_tarefa)
+          var Ajax = new XMLHttpRequest()
+            Ajax.open('POST','../api/quadros.php',true)
+            Ajax.onreadystatechange = function(){
+              if(Ajax.readyState == 4){
+                if(Ajax.status == 200){
+                  var resposta = Ajax.responseText   
+                  Swal.fire(
+                    resposta,
+                  '',
+                  'success'
+                ).then((ev)=>{
+                  listar_quadro(id_quadro)   
+                  $('.modal').modal('hide');             
+                })                              
+                 
+                }
+              }
+            }
+            Ajax.send(fd)
+        }
+      }
     </script>
    
 </body>

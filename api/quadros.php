@@ -258,13 +258,13 @@ switch($acao){
                     </div>
                 </div>
             </div>
-          
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button onclick="excluir_tarefa('<?=$id?>')" type="button" class="btn btn-danger">Excluir Tarefa</button>
+            </div>
             </div>
         </div>
         </div>
-
-
-     
 
         <h5><?=$rst[0]['nome']?></h5>
          <div class="row">
@@ -490,6 +490,16 @@ switch($acao){
     $exec = $pdo->prepare($delete);
     $exec->execute();
  break;   
+ case 'excluir_tarefa'; 
+ $id = $_POST['id'];
+
+ $del = "DELETE FROM cartao WHERE id = '{$id}'";
+ $exec = $pdo->prepare($del);
+ $exec->execute();
+ if($exec->rowCount() > 0){
+   echo "Tarefa excluida com sucesso!";
+ }
+ break;
 
  
 }
