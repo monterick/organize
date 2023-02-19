@@ -16,8 +16,10 @@ switch($acao){
 ?>
 
 
+    
+    
+    <h3 style="margin: 10px;"><i class="fa fa-list-alt"></i> Seus Quadros</h3>
     <!-- Modal -->
-    <div><i class="fa fa-user"></i> Seus Quadros</div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
