@@ -298,6 +298,47 @@ if($_SESSION['session_log']!='S'){
         }
       }
     
+      function listar_comentarios(id){
+        var fd = new FormData()
+        document.getElementById('id_tarefa_b').value = id
+        fd.append('acao','listar_comentarios')
+        fd.append('id',id)
+        var Ajax = new XMLHttpRequest()
+        Ajax.open('POST','../api/quadros.php',true)
+        Ajax.onreadystatechange = function(){
+          if(Ajax.readyState == 4){
+           if(Ajax.status == 200){
+            resposta = Ajax.responseText 
+            document.getElementById('resposta_comentarios').innerHTML = resposta;
+           }else{
+            document.getElementById('resposta_comentarios').innerHTML = 'Erro ao listar, tente novamente mais tarde';
+           }
+          }
+        }
+        Ajax.send(fd)
+       
+      }
+
+      function salvar_comentario(){
+        var id_tarefa = document.getElementById('cod_tarefa').value
+        var comentario = document.getElementById('comentario_atv').value
+        var fd = new FormData()
+        fd.append('acao','salvar_comentario')
+        fd.append('comentario',comentario)
+        fd.append('id_tarefa',id_tarefa)
+        var Ajax = new XMLHttpRequest()
+        Ajax.open('POST','../api/quadros.php',true)
+        Ajax.onreadystatechange = function(){
+          if(Ajax.readyState == 4){
+             if(Ajax.status == 200){
+               var resposta = Ajax.responseText
+               console.log(resposta)
+               listar_comentarios(id_tarefa)
+             }
+          }
+        }
+        Ajax.send(fd)
+      }
                            
     </script>
    

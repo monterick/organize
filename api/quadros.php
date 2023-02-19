@@ -242,11 +242,18 @@ switch($acao){
                         <i class="fa fa-list"></i> Atividades
                         </div>
                     </div>
-                    <div class="row">
-                        
+                    <div class="row">                        
                         <div class="col">
+                            <input type="hidden" name="cod_tarefa" id="cod_tarefa">
                             <textarea placeholder="Escrever um comentário" onfocus="document.getElementById('salvar_comentario').style.display = 'block'" onfocusout="oculta_botao('salvar_comentario')" class="form-control" name="comentario_atv" id="comentario_atv" cols="30" rows="1"></textarea>
-                            <button id="salvar_comentario" onclick="alert('opaa')" style="margin-top: 10px;display: none;" class="btn btn-primary">Salvar</button>
+                            <button id="salvar_comentario" onclick="salvar_comentario()" style="margin-top: 10px;display: none;" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="resposta_comentarios">
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -277,7 +284,7 @@ switch($acao){
                              if($exec_card->rowCount()>0){ 
                                 while($rst2 = $exec_card->fetch(\PDO::FETCH_ASSOC)){
                             ?>
-                            <article data-bs-toggle="modal" data-bs-target="#exampleModal3" class="card" draggable="true" ondragstart="drag(event)" data-id="<?=$rst2['id']?>">
+                            <article onclick="listar_comentarios('<?=$rst2['id']?>')" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="card" draggable="true" ondragstart="drag(event)" data-id="<?=$rst2['id']?>">
                                 <h6><?=$rst2['nome']?></h6>
                             </article>  
                             <?php 
@@ -287,7 +294,7 @@ switch($acao){
                         }?>  
                                      
                         </div>
-                        <div id="form_cartao<?=$id_lista?>"  style="margin: 10px;margin-top: -10px;" class="column column-todo"><button onclick="form_newcartao('div_cartao<?=$id_lista?>')" style="font-size: 10px;" class="btn btn-secondary"><i class="fa fa-pencil"></i>+Cartão</button>
+                        <div id="form_cartao<?=$id_lista?>"  style="margin: 10px;margin-top: -10px;" class="column column-todo"><button onclick="form_newcartao('div_cartao<?=$id_lista?>')" style="font-size: 10px;" class="btn btn-secondary"><i class="fa fa-pencil"></i>+Tarefa</button>
                           <div id="div_cartao<?=$id_lista?>" style="margin-top: 5px; display: none;">
                                 <input type="text" id="name_newcartao<?=$id_lista?>" name="name_newcartao" class="form-control">
                                 <button style="margin-top:5px" onclick="salvar_cartao('<?=$id?>','<?=$id_lista?>')" class="btn btn-primary">Salvar</button>
@@ -428,6 +435,38 @@ switch($acao){
 
  break;   
 
+ case 'listar_comentarios':
+    $id_tarefa = $_POST['id'];
+    //comentarios de Tarefas
+    $select =  "SELECT * FROM atividade WHERE tarefa_id = '{$id_tarefa}' order by id desc";
+    $exec = $pdo->prepare($select);
+    $exec->execute();
+    if($exec->rowCount() > 0){ echo "Histórico";
+      while($rst = $exec->fetch(\PDO::FETCH_ASSOC)){ 
+        
+        ?>
+          <div class="row" style="margin-top: 5px;">                        
+                <div class="col">
+                    <input type="hidden" name="cod_tarefa_alt<?=$id_tarefa?>" id="cod_tarefa_alt<?=$id_tarefa?>" value="<?=$id_tarefa?>">
+                    <textarea  disabled class="form-control" name="comentario_atv_alt<?=$rst['id']?>" id="comentario_atv_alt<?=$rst['id']?>"  cols="30" rows="1" ><?=$rst['descricao']?></textarea>
+                    <div><a href="#">Excluir</a><a href="#" style="margin-left: 10px;">Editar</a></div>                    
+                    <button id="salvar_comentario_alt<?=$rst['id']?>" onclick="('opaa')" style="margin-top: 10px;display: none;" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+      <?php }
+    }
+ break;   
+
+ case 'salvar_comentario';
+  $comentario = $_POST['comentario'];
+  $id_tarefa = $_POST['id_tarefa'];
+
+  $insert = "INSERT INTO atividade(tarefa_id,descricao,data_cadatro) VALUES('{$id_tarefa}','{$comentario}',NOW())";
+  echo $insert;
+  $exec = $pdo->prepare($insert); 
+  $exec->execute();
+
+ break;
 
  
 }
