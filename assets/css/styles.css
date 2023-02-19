@@ -77,7 +77,7 @@ button.AppButton {
     padding: 7px 10px;
 }
 
-nav.AppHeader {
+.AppHeader {
     background-color: #09f;
     display: flex;
     flex-direction: row;

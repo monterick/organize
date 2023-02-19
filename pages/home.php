@@ -15,65 +15,78 @@ if($_SESSION['session_log']!='S'){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/fontawesome/css/font-awesome.min.css">
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <title>Document</title>
+  <title>Organize</title>
 </head>
+<style>
+  .AppHeader {
+    background-color: #09f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
+    color: #fff;
+}
+</style>
 <body>
-    <div id="app">
-    
-    <nav class="header navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <h4 class="navbar-brand" >Organize</h4>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search" action="../api/logoff.php">        
-        <button class="btn btn-secondary" type="submit">Sair</button>
-      </form>
-    </div>
+ 
+<div class="container-fluid">
+<div class="row">
+   <header class="AppHeader">
+     Organize
+   </header>
   </div>
-</nav>
-
-        <div class="sidebar">
-          <span style="margin-top: 50PX;"></span>
-           <a class="buttonNav" target="iframe" href="quadros.php"><i class="fa fa-list-alt" aria-hidden="true"></i>Quadros</a>
-           <?php if($_SESSION['perfil'] == 1){?>
-           <a class="buttonNav" target="iframe" href="usuarios.php"><i class="fa fa-users" aria-hidden="true"></i> Usuários</a>
-           <?php }?>
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a target="iframe" href="./quadros.php" class="nav-link align-middle px-0">
+                             <span class="ms-1 d-none d-sm-inline"><i class="fa fa-list-alt" aria-hidden="true"></i>Quadros</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a target="iframe" href="./usuarios.php" class="nav-link align-middle px-0">
+                             <span class="ms-1 d-none d-sm-inline"><i class="fa fa-users" aria-hidden="true"></i> Usuários</span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+                <hr>
+                <div>
+                
+                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"  href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                             <span class="ms-1 d-none d-sm-inline"><?=$_SESSION['nome']?></span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="../api/logoff.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Sair</span></a>
+                            </li>
+                            
+                           </ul>
+                    
+                </div>
+                <hr>
+                <hr>
+           
+            </div>
         </div>
-        <div class="content">
-        <iframe name="iframe" id="IdIframe" scrolling="Auto" src="quadros.php" frameborder="0" width="100%"> </iframe>
-        </div>       
+        <div class="col py-3">
+        <iframe name="iframe" id="IdIframe" scrolling="Auto" src="quadros.php" frameborder="0" width="100%" height="100%"> </iframe>
+        </div>
     </div>
-
+</div>
 </body>
 </html>
