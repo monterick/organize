@@ -60,7 +60,7 @@ switch($acao){
 
             while ($rst = $stm->fetch(\PDO::FETCH_ASSOC)) {
         ?>
-                <div class="col-md-3" style="margin: 5px;">
+                <div class="col-md-3" style="margin-top: 5px;margin-left: 15px;">
 
                     <div onclick="listar_quadro('<?=$rst['id']?>')" class="btn btn-light card" style="width: 18rem;">
                         <h4 src="..." class="card-img-top"><?=$rst['nome']?></h4>
@@ -74,7 +74,7 @@ switch($acao){
         }
         ?>
         <div class="col-md-3">
-            <div class="btn btn-light card" style="width: 18rem" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="btn btn-light card" style="width: 18rem;margin-top: 5px;margin-left: 15px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="card-body">
                     <h5 class="card-title">+ Novo Quadro</h5>
                 </div>
