@@ -34,7 +34,7 @@ if (trim($login == "")) {
             echo '
 				<div class="alert alert-success" role="alert" >
 				  	Você está conectado no login ' . $_SESSION['session_login'] . '. Deseja sair? <br>
-				  	<a style="margin: 8px 0 15px 0; background: #3c763d; border-radius: 3px; padding: 5px 10px; color: #dff0d8; text-decoration: none;" href="logout_VL.php" id="gerencial"><i class="fa fa-sign-out"></i> Sim</a>
+				  	<a style="margin: 8px 0 15px 0; background: #3c763d; border-radius: 3px; padding: 5px 10px; color: #dff0d8; text-decoration: none;" href="../api/logoff.php" id="gerencial"><i class="fa fa-sign-out"></i> Sim</a>
 				</div>
 				';
             exit();

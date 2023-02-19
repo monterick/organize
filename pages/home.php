@@ -56,11 +56,13 @@ if($_SESSION['session_log']!='S'){
                         <i class="fa fa-list-alt" aria-hidden="true"></i>  <span class="ms-1 d-none d-sm-inline">Quadros</span>
                         </a>
                     </li>
+                    <?php if($_SESSION['perfil'] == 1){?>
                     <li class="nav-item">
                         <a target="iframe" href="./usuarios.php" class="nav-link align-middle px-0">
                         <i class="fa fa-users" aria-hidden="true"></i> <span class="ms-1 d-none d-sm-inline"> Usuários</span>
                         </a>
                     </li>
+                    <?php }?>
                     
                     
                     
