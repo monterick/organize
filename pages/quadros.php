@@ -299,8 +299,7 @@ if($_SESSION['session_log']!='S'){
       }
     
       function listar_comentarios(id){
-        var fd = new FormData()
-        document.getElementById('cod_tarefa').value = id
+        var fd = new FormData()        
         fd.append('acao','listar_comentarios')
         fd.append('id',id)
         var Ajax = new XMLHttpRequest()
@@ -422,6 +421,58 @@ if($_SESSION['session_log']!='S'){
             }
             Ajax.send(fd)
         }
+      }
+
+      function alterar_data_conc(){
+          var id_tarefa = document.getElementById('cod_tarefa').value
+          var data = document.getElementById('data_conclusao').value
+          
+          var fd = new FormData()
+          fd.append('acao','alterar_data_conc')
+          fd.append('data',data)
+          fd.append('id_tarefa',id_tarefa)          
+         
+          var Ajax = new XMLHttpRequest()
+            Ajax.open('POST','../api/quadros.php',true)
+            Ajax.onreadystatechange = function(){
+              if(Ajax.readyState == 4){
+                if(Ajax.status == 200){
+                  resposta = Ajax.responseText
+                  console.log(resposta)
+                }else{
+                  console.log('erro') 
+                }
+              }
+            }
+            Ajax.send(fd)
+
+      }
+      function conclusao(){
+        boll = document.getElementById('conclusao').checked
+        var id_tarefa = document.getElementById('cod_tarefa').value
+        var fd = new FormData()
+        if(boll == true){
+           var conclusao = 1;
+        }else{
+           var conclusao = 0;
+        }
+          fd.append('acao','alterar_conc')          
+          fd.append('id_tarefa',id_tarefa)  
+          fd.append('conclusao',conclusao)         
+         
+          var Ajax = new XMLHttpRequest()
+            Ajax.open('POST','../api/quadros.php',true)
+            Ajax.onreadystatechange = function(){
+              if(Ajax.readyState == 4){
+                if(Ajax.status == 200){
+                  resposta = Ajax.responseText
+                  console.log(resposta)
+                }else{
+                  console.log('erro') 
+                }
+              }
+            }
+            Ajax.send(fd)
       }
     </script>
    

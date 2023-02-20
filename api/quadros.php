@@ -238,26 +238,8 @@ switch($acao){
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="resposta_atividade">
-                    <div class="row">
-                        <div class="col">
-                        <i class="fa fa-list"></i> Atividades
-                        </div>
-                    </div>
-                    <div class="row">                        
-                        <div class="col">
-                            <input type="hidden" name="cod_tarefa" id="cod_tarefa">
-                            <textarea placeholder="Escrever um comentário" onfocus="document.getElementById('salvar_comentario').style.display = 'block'" onfocusout="oculta_botao('salvar_comentario')" class="form-control" name="comentario_atv" id="comentario_atv" cols="30" rows="1"></textarea>
-                            <button id="salvar_comentario" onclick="salvar_comentario()" style="margin-top: 10px;display: none;" class="btn btn-primary">Salvar</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div id="resposta_comentarios">
-
-                            </div>
-                        </div>
-                    </div>
+                <div id="resposta_comentarios">
+             
                 </div>
             </div>
             <div class="modal-footer">
@@ -288,6 +270,14 @@ switch($acao){
                             ?>
                             <article onclick="listar_comentarios('<?=$rst2['id']?>')" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="card" draggable="true" ondragstart="drag(event)" data-id="<?=$rst2['id']?>">
                                 <h6><?=$rst2['nome']?></h6>
+                                <?php if($rst2['data_conclusao']!=null){
+                                    $color = "";
+                                    if($rst2['concluido'] == 1){
+                                       $color = "background-color: greenyellow;"; 
+                                    }
+                                    ?>
+                                <span style="<?=$color?>border-radius: 5px; font-size: 10px; "><i class="fa fa-clock-o"></i><?=date('d/m/Y',strtotime($rst2['data_conclusao']))?></span>
+                                <?php }?>    
                             </article>  
                             <?php 
                             } ?>
@@ -443,12 +433,50 @@ switch($acao){
     $select =  "SELECT * FROM atividade WHERE tarefa_id = '{$id_tarefa}' order by id desc";
     $exec = $pdo->prepare($select);
     $exec->execute();
+
+    ?> 
+       <div class="row">
+            <div class="col">
+            <i class="fa fa-list"></i> Atividades
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <?php 
+                 $sel_dat = "SELECT data_conclusao,concluido FROM cartao WHERE id = '{$id_tarefa}'";
+                 $exec2 = $pdo->prepare($sel_dat);
+                 $exec2->execute();
+                 while($rst0 = $exec2->fetch(\PDO::FETCH_ASSOC)){
+                    $data_conc = $rst0['data_conclusao'];
+                    $concluido = $rst0['concluido'];
+                 }
+                
+                ?>
+            <i style="margin: 10px;" class="fa fa-calendar"></i><input value="<?=$data_conc?>" onchange="alterar_data_conc()" type="date" id="data_conclusao" name="data_conclusao"> Data estimada para conclusão
+            </div>   
+            <div class="col-md-2">
+            <input type="checkbox" onchange="conclusao()" id="conclusao" name="conclusao" <?php if($concluido == 1){?> checked <?php }?> >
+                <label for="scales">Concluido</label>
+                </div>
+            </div> 
+        </div>
+        <div class="row">                        
+            <div class="col">
+                <input type="hidden" name="cod_tarefa" id="cod_tarefa" value="<?=$id_tarefa?>">
+                <textarea placeholder="Escrever um comentário" onfocus="document.getElementById('salvar_comentario').style.display = 'block'" onfocusout="oculta_botao('salvar_comentario')" class="form-control" name="comentario_atv" id="comentario_atv" cols="30" rows="1"></textarea>
+                <button id="salvar_comentario" onclick="salvar_comentario()" style="margin-top: 10px;display: none;" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    <?php
+   
     if($exec->rowCount() > 0){ echo "Histórico";
       while($rst = $exec->fetch(\PDO::FETCH_ASSOC)){ 
         $id_comentario = $rst['id'];
-        ?>
+        ?>  
+          
           <div class="row" style="margin-top: 5px;">                        
                 <div class="col">
+                    <input type="hidden" name="cod_tarefa0" id="cod_tarefa0" value="<?=$id_tarefa?>">                   
                     <input type="hidden" name="cod_tarefa_alt<?=$id_tarefa?>" id="cod_tarefa_alt<?=$id_tarefa?>" value="<?=$id_tarefa?>">
                     <textarea  disabled class="form-control" name="comentario_atv_alt<?=$rst['id']?>" id="comentario_atv_alt<?=$rst['id']?>"  cols="30" rows="1" ><?=$rst['descricao']?></textarea>
                     <div class="row">
@@ -459,9 +487,9 @@ switch($acao){
                     <button id="cancelar_editar<?=$rst['id']?>" onclick="bloqueia_editar('comentario_atv_alt<?=$rst['id']?>','salvar_comentario_alt<?=$rst['id']?>','cancelar_editar<?=$rst['id']?>')" class="btn btn-secondary" style="margin-top: 12px;font-size: 12px;display: none;">Cancelar</button>
                     </div>    
                 </div>
-                    <div><a onclick="excluir_comentario('<?=$id_tarefa?>','<?=$id_comentario?>')" href="#">Excluir</a><a onclick="libera_editar('comentario_atv_alt<?=$rst['id']?>','salvar_comentario_alt<?=$rst['id']?>','cancelar_editar<?=$rst['id']?>')" href="#" style="margin-left: 10px;">Editar</a></div>                    
+                    <div><span style="margin-right: 10px;"><?=date('d/m/Y H:i:s',strtotime($rst['data_cadatro']))?></span><a onclick="excluir_comentario('<?=$id_tarefa?>','<?=$id_comentario?>')" href="#">Excluir</a><a onclick="libera_editar('comentario_atv_alt<?=$rst['id']?>','salvar_comentario_alt<?=$rst['id']?>','cancelar_editar<?=$rst['id']?>')" href="#" style="margin-left: 10px;">Editar</a></div>                    
                    
-                    
+                   
                 </div>
             </div>
       <?php }
@@ -503,5 +531,29 @@ switch($acao){
  }
  break;
 
+ case 'alterar_data_conc';
+ $id = $_POST['id_tarefa'];
+ $data = $_POST['data'];
+
+ $update = "UPDATE cartao SET data_conclusao = '{$data}' WHERE id = '{$id}'";
+ $exec = $pdo->prepare($update);
+ $exec->execute();
+ if($exec->rowCount() > 0){
+   echo 'ok';
+ }
+ break;
+
+ case 'alterar_conc':
+
+    $id_tarefa = $_POST['id_tarefa'];
+    $conclusao = $_POST['conclusao'];
+    $update = "UPDATE cartao set concluido = '{$conclusao}' WHERE id = '{$id_tarefa}'";
+    
+    $ex = $pdo->prepare($update);
+    $ex->execute();
+    if($ex->rowCount() > 0){
+      echo 'ok';
+    }      
+ break;
  
 }
